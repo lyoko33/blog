@@ -26,7 +26,10 @@ class ArticleRequest extends FormRequest
         return [
             "name" => "required",
             "categorie_id" => "required",
-            "image" => "required",
+            "image" => [
+                "required",
+                
+            ],
             "description" => "required"
         ];
     }

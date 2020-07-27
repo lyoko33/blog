@@ -1,5 +1,10 @@
 @extends('administration.home')
 
+@section('tinymce')
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+@endsection
+
 @section('myContent')
 
     <h1 class="card-header text-danger mb-4">Nouvel Article</h1>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ArticlesController extends Controller
 {
@@ -59,7 +61,7 @@ class ArticlesController extends Controller
             "name" => $request->name,
             "description" => $request->description,
             "categorie_id" => $request->categorie_id,
-            "image" => "uploads/articles/".$image_complete_name
+            "image" => "uploads/articles/" . $image_complete_name
         ));
 
         return redirect()->Route('article_index')->with(array(
@@ -88,7 +90,9 @@ class ArticlesController extends Controller
     public function edit(Article $article)
     {
         $categories = Categorie::all(); 
-        return view('administration.articles.edit', array('article' => $article, 'categories'=> $categories)); 
+        $ancienne_image_article = $article->image;
+        
+        return view('administration.articles.edit', array('article' => $article, 'categories'=> $categories, 'ancienne_image_article' => $ancienne_image_article)); 
     }
 
     /**
@@ -98,10 +102,25 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, Article $article)
+    public function update(ArticleRequest $request, Article $article) 
     {
-        $article->update($request->all());
-        return redirect()->Route('article_index'); 
+        $path = parse_url($article->image);
+        File::delete(public_path($path['path']));
+        
+        $image = $request->image;
+        $image_complete_name = time().$image->getClientOriginalName();
+        $image->move('uploads/articles/', $image_complete_name);
+
+        $article->update(array(
+            "name" => $request->name,
+            "description" => $request->description,
+            "categorie_id" => $request->categorie_id,
+            "image" => "uploads/articles/" . $image_complete_name
+        ));
+
+        return redirect()->Route('article_index')->with(array(
+            "success" => "Votre article a été modifié avec succès",
+        )); ; 
     }
 
     /**
@@ -112,7 +131,16 @@ class ArticlesController extends Controller
      */
     public function destroy(Article $article)
     {
+
+        $path = parse_url($article->image);
+        File::delete(public_path($path['path']));
+        
         $article->delete();
-        return redirect()->Route('article_index'); 
+
+        return redirect()->Route('article_index')->with(array(
+            "success" => "Cet article a été supprimé avec succès",
+        )); 
     }
+
+    
 }

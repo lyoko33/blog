@@ -8,10 +8,13 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <div class="container-fluid m-5">
+@section('content')
+
+    
         
-        <h1 class="text-center text-danger my-3">Contactez-nous</h1>
+        <h1 class="text-center text-danger my-3 py-4 bg-dark ">Contactez-moi</h1>
         
         
         
@@ -23,7 +26,7 @@
         @endif
 
         <div class="row my-5">
-            <div class="col-md-8 container">
+            <div class="col-md-8">
                 <form method="post" action="{{ Route('contact_store') }}">
                     @csrf
                     <div class="form-group">
@@ -63,7 +66,7 @@
                 </form>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" >
                 <h2 class="text-center text-danger">Infos</h2>
                 <div class="card-body">
                     <h3>Contact: 06...</h3>
@@ -73,5 +76,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 @endsection

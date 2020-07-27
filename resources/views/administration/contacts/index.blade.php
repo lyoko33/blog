@@ -1,11 +1,11 @@
 @extends('administration.home')
 
 @section('myContent')
-    <h1 class="card-header mb-4">Liste des contacts</h1>
+    <h2 class="card-header mb-4">Liste des contacts</h2>
 
 @if ($contacts->count() > 0)
 
-<table class="table table-bordered table-striped table-hover">
+<table id="myTable" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>Nom</th>
@@ -29,8 +29,15 @@
         @endforeach
     </tbody>
 </table>
+
 @else
     <h3 class="text-center">Aucun contact</h3>
 @endif
+
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
 
 @endsection

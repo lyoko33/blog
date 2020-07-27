@@ -10,6 +10,12 @@ class Article extends Model
 {
     protected $fillable = array('name', 'description', 'categorie_id', 'image');
     
+
+    public function getImageAttribute($image)
+    {
+        return asset($image);
+    }
+
     public function categorie()
     {
         return $this->belongsTo(Categorie::class); 

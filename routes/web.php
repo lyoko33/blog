@@ -11,7 +11,25 @@
 |
 */
 
-Route::get('/', "FrontendController@index")->name('front_index');
+Route::get('/', "FrontController@index")->name('front_index');
+
+Route::post('/store', "ContactsController@store")->name('contact_store');
+Route::get('/contact', "FrontController@contact")->name('front_contact');
+Route::get('/blog', "FrontController@blog")->name('front_blog');
+Route::get('/categorie_cible/{categorie_cible}', "FrontController@categorieCible")->name('categorie_cible');
+Route::get('/blog/article_show/{article}', "FrontController@articleShow")->name('front_article_show');
+Route::post('/blog/article/commentaire/store/{article}', "FrontController@storeCommentaire")->name('commentaire_store');
+
+Route::get('/recherche', function(){
+    $categories = \App\Categorie::where('nom', 'like', '%' . request('recherche') . '%')->get();
+    $articles = \App\Article::where('titre', 'like', '%' . request('recherche') . '%')->get();
+    return view('front.recherche', array("categories" => $categories,
+                                    "articles" => $articles
+                                  ) 
+                )->with(array("titre" => "Résultat de la recherche pour : " . request('recherche')
+                             )
+                        );
+})->name('recherche');
 
 Auth::routes();
 
@@ -40,13 +58,7 @@ Route::middleware('auth')->prefix('administration/contacts')->group(function(){
     Route::get('/index', "ContactsController@index")->name('contact_index');
     Route::get('/create', "ContactsController@create")->name('contact_create');
     Route::get('/show/{contact}', "ContactsController@show")->name('contact_show');
-    
-    
-    
 });
 
 
-Route::post('/store', "ContactsController@store")->name('contact_store');
-Route::get('/contact', "FrontController@contact")->name('front_contact');
-Route::get('/blog', "FrontController@blog")->name('front_blog');
 

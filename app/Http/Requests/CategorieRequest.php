@@ -24,14 +24,15 @@ class CategorieRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required"
+            "name" => "required|max:255",
         ];
     }
 
     public function messages()
     {
         return [
-            "name.required" => "<span style:'color:red;'>Le nom est obligatoire</span>"
+            "name.required" => "<span style='color:red;'>Le nom est obligatoire</span>",
+            "name.max" => "<span style='color:red;'>Vous ne pouvez pas entrer plus de 255 caractères</span>"
         ];
     }
 }

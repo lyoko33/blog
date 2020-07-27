@@ -27,49 +27,50 @@
 @section('content')
     
 <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Fluid jumbotron</h1>
-      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    <div class="container" data-aos="fade-up" >
+      <h1 class="display-4">Bienvenue sur mon blog</h1>
+      <p class="lead">Je suis un grand passionné de sport, voyage, musique et plein d'autres domaines.<br/>     
+j'ai hâte de vous faire découvrir ce que je publie par rapport à ces différents domaines.
+      </p>
     </div>
   </div>
 
-  <div class="container">
-    <h1 class="text-center text-danger my-5">Mes Hobbies</h1>
+  <div class="container" >
+    <h1 class="text-center text-danger my-5" data-aos="fade-left" data-aos-duration="2000" >À propos de moi</h1>
 
-    <div class="row d-flex justify-content-between">
+    <div class="row d-flex justify-content-around" data-aos="fade-right" data-aos-duration="2000" >
         <div class="card bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">Header</div>
+            <div class="card-header"><h3 class="text-center">Spécialisation</h3> </div>
             <div class="card-body">
-              <h5 class="card-title">Light card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title">En Ingénierie Informatique</h5>
+              <p class="card-text">J'adore cette sensation de partir de rien et d'accomplir de grandes choses. Voilà pourquoi j'étudie dans ce domaine.</p>
+            </div>
+        </div>
+    
+          <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header"><h3 class="text-center">Écrivain</h3> </div>
+            <div class="card-body">
+              <h5 class="card-title">Bientôt mon premier livre</h5>
+              <p class="card-text">Grand passionné de l'infiniment grand et de l'infiniment petit, je sortirai bientot mon tout premier livre allant dans cet ordre d'idées.</p>
             </div>
           </div>
     
           <div class="card bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">Header</div>
+            <div class="card-header"><h3 class="text-center">Formateur</h3> </div>
             <div class="card-body">
-              <h5 class="card-title">Light card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-    
-          <div class="card bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h5 class="card-title">Light card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title">En Informatique</h5>
+              <p class="card-text">Partant du principe que la vie c'est du donner et du recevoir, j'adore transmettre des informations aux gens et mes formations me permettent de le faire.</p>
             </div>
           </div>
     </div>
   </div>
 
-  <div class="container-fluid my-5 bg-dark contact">
-    <h2 class="text-center display-4 py-5"><a href="{{ Route('front_contact') }}">Contactez-moi</a> </h2>
+  <div class="container-fluid my-5 bg-secondary div_articles" style="background-image: url('images/div_article_r.jpg'); ">
+  <h2  class="text-center display-4 py-5"><a href="{{ Route('front_blog') }}"> Mes articles</a> </h2>
   </div>
-
-  
 
 @endsection
+
 
 
 

@@ -15,7 +15,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::all();
+        $categories = Categorie::paginate(10);
         
         return view('administration.categories.index', array("categories" =>$categories)); 
     }
@@ -39,7 +39,9 @@ class CategoriesController extends Controller
     public function store(CategorieRequest $request)
     {
         Categorie::create($request->all()); 
-        return redirect()->Route('categorie_index');
+        return redirect()->Route('categorie_index')->with(array(
+            "success" => "Votre catégorie a été créée avec succès",
+        ));
     }
 
     /**
@@ -74,7 +76,9 @@ class CategoriesController extends Controller
     public function update(CategorieRequest $request, Categorie $categorie)
     {
         $categorie->update($request->all());
-        return redirect()->Route('categorie_index'); 
+        return redirect()->Route('categorie_index')->with(array(
+            "success" => "Votre catégorie a été modifiée avec succès",
+        )); 
     }
 
     /**
@@ -90,7 +94,9 @@ class CategoriesController extends Controller
             $article->delete();
         }
 
-        return redirect()->Route('categorie_index'); 
+        return redirect()->Route('categorie_index')->with(array(
+            "success" => "Votre catégorie ainsi que ses articles ont été supprimés avec succès",
+        ));
 
     }
 }
